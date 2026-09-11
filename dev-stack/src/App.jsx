@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TechCatalog from "./components/TechCatalog";
+import Footer from "./components/Footer"; // ১. Footer ইমপোর্ট করা হলো
 
 function App() {
   const [selectedStack, setSelectedStack] = useState([]);
@@ -33,16 +34,20 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900">
-      <Navbar />
-      <main className="max-w-7xl mx-auto px-4 sm:px-8">
-        <Hero />
-        <TechCatalog
-          selectedStack={selectedStack}
-          onToggleStack={handleToggleStack}
-          onClearAll={handleClearAll}
-        />
-      </main>
+    <div className="min-h-screen bg-white font-sans text-gray-900 flex flex-col justify-between">
+      <div>
+        <Navbar />
+        <main className="max-w-7xl mx-auto px-4 sm:px-8">
+          <Hero />
+          <TechCatalog
+            selectedStack={selectedStack}
+            onToggleStack={handleToggleStack}
+            onClearAll={handleClearAll}
+          />
+        </main>
+      </div>
+
+      <Footer />
 
       <Toaster position="bottom-right" reverseOrder={false} />
     </div>
@@ -50,3 +55,4 @@ function App() {
 }
 
 export default App;
+
