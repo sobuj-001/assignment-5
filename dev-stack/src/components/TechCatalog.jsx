@@ -1,6 +1,7 @@
 import techData from "../data/technologies.json";
+import { brandGradient } from "../theme";
 
-function TechCatalog({ selectedStack, onToggleStack, onClearAll }) {
+function TechCatalog({ selectedStack, onToggleStack, onRemoveItem, onClearAll }) {
   const getBadgeStyle = (badge) => {
     switch (badge?.toLowerCase()) {
       case "popular":
@@ -49,7 +50,6 @@ function TechCatalog({ selectedStack, onToggleStack, onClearAll }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-    
         <div className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {techData.map((tech) => {
             const isAdded = selectedStack.some((item) => item.id === tech.id);
@@ -96,19 +96,17 @@ function TechCatalog({ selectedStack, onToggleStack, onClearAll }) {
                         {tech.difficulty || tech.experience}
                       </span>
                     </div>
-                    {/* Yellow Star Rating */}
                     <span className="font-bold text-gray-700 flex items-center gap-1 text-[11px]">
                       <span className="text-amber-400 text-xs">★</span> {tech.rating}
                     </span>
                   </div>
 
                   <button
-                    disabled={isAdded}
                     onClick={() => onToggleStack(tech)}
-                    className={`w-full py-2.5 rounded-xl font-semibold text-xs transition-all ${
+                    className={`w-full py-2.5 rounded-xl font-semibold text-xs transition-all cursor-pointer ${
                       isAdded
-                        ? "bg-pink-50 text-pink-600 border border-pink-200 opacity-80 cursor-not-allowed"
-                        : "bg-slate-900 text-white hover:bg-slate-800 cursor-pointer"
+                        ? "bg-pink-50 text-pink-600 border border-pink-200"
+                        : "bg-slate-900 text-white hover:bg-slate-800"
                     }`}
                   >
                     {isAdded ? "✓ Added to Stack" : "Add to Stack"}
@@ -155,8 +153,9 @@ function TechCatalog({ selectedStack, onToggleStack, onClearAll }) {
                           </span>
                         </div>
                       </div>
+
                       <button
-                        onClick={() => onToggleStack(item)}
+                        onClick={() => onRemoveItem(item)}
                         className="text-gray-300 hover:text-red-500 text-sm font-light px-1 cursor-pointer transition-colors"
                       >
                         ✕
