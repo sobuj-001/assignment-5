@@ -7,20 +7,28 @@ function TechCatalog({ selectedStack, onToggleStack, onClearAll }) {
         return "bg-sky-50 text-sky-500 border-sky-100";
       case "versatile":
       case "standard":
+      case "vcs":
         return "bg-emerald-50 text-emerald-500 border-emerald-100";
       case "fast":
       case "ubiquitous":
+      case "ultra fast":
         return "bg-amber-50 text-amber-500 border-amber-100";
       case "top sql":
       case "essential":
       case "robust":
       case "modern":
       case "containers":
+      case "type-safe":
         return "bg-blue-50 text-blue-500 border-blue-100";
       case "cache":
       case "full-stack":
       case "fullstack":
+      case "nosql":
         return "bg-rose-50 text-rose-500 border-rose-100";
+      case "ai & web":
+      case "ai & backend":
+      case "api query":
+        return "bg-purple-50 text-purple-500 border-purple-100";
       default:
         return "bg-gray-50 text-gray-500 border-gray-100";
     }
@@ -36,12 +44,12 @@ function TechCatalog({ selectedStack, onToggleStack, onClearAll }) {
           </span>
         </h2>
         <p className="text-gray-500 mt-1 text-sm sm:text-base">
-          Pick one technology per category to build your ideal stack.
+          Pick technologies to build your ideal stack.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
+    
         <div className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {techData.map((tech) => {
             const isAdded = selectedStack.some((item) => item.id === tech.id);
@@ -85,7 +93,7 @@ function TechCatalog({ selectedStack, onToggleStack, onClearAll }) {
                         {tech.category}
                       </span>
                       <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-md font-medium text-[10px]">
-                        {tech.experience}
+                        {tech.difficulty || tech.experience}
                       </span>
                     </div>
                     {/* Yellow Star Rating */}
