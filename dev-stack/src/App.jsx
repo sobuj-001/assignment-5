@@ -1,4 +1,6 @@
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TechCatalog from "./components/TechCatalog";
@@ -8,15 +10,26 @@ function App() {
 
   const handleToggleStack = (tech) => {
     const exists = selectedStack.some((item) => item.id === tech.id);
+
     if (exists) {
       setSelectedStack(selectedStack.filter((item) => item.id !== tech.id));
+      toast.error(`${tech.name} removed from stack!`, {
+        duration: 2000,
+      });
     } else {
       setSelectedStack([...selectedStack, tech]);
+      toast.success(`${tech.name} added to stack!`, {
+        duration: 2000,
+      });
     }
   };
 
   const handleClearAll = () => {
     setSelectedStack([]);
+    toast("All technologies removed!", {
+      icon: "🗑️",
+      duration: 2000,
+    });
   };
 
   return (
@@ -30,6 +43,8 @@ function App() {
           onClearAll={handleClearAll}
         />
       </main>
+
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 }
